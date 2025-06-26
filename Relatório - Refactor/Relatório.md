@@ -42,6 +42,8 @@ Como o repositório não apresenta instruções detalhadas sobre como executar o
 
 ### 3.1. Resumo das Refatorações
 
+-> Link para o PR com as melhorias implementadas: https://github.com/debora67/Sistema-Moeda-Release2/pull/1
+
 As refatorações foram focadas em melhorar a legibilidade do código, a organização de responsabilidades e a padronização de nomenclaturas. Os pontos escolhidos refletem boas práticas que podem facilitar a manutenção futura do sistema, e a sua expansão.
 
 ### 3.2. Refatoração 1: Separação de serviços por entidade
