@@ -1,14 +1,21 @@
 import React from 'react';
-import AlunoForm from './components/AlunoForm';
-import EmpresaForm from './components/EmpresaForm';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AlunoForm from './pages/AlunosPage/AlunoForm';
+import EmpresaForm from './pages/EmpresasPage/EmpresaForm';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <AlunoForm />
-      <hr />
-      <EmpresaForm />
-    </div>
+    <Router>
+      <Navbar />
+      <div style={{ padding: '2rem' }}>
+        <Routes>
+          <Route path="/aluno" element={<AlunoForm />} />
+          <Route path="/empresa" element={<EmpresaForm />} />
+          <Route path="*" element={<AlunoForm />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
