@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import api from '../services/api';
-import './Form.css';
+import { submitEmpresa } from '../../services/empresa';
+import '../defaultStyles/Form.css';
 
 export default function EmpresaForm() {
   const [form, setForm] = useState({
@@ -10,20 +10,9 @@ export default function EmpresaForm() {
   const handleChange = e =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    try {
-      await api.post('/empresas', form);
-      alert('Empresa cadastrada com sucesso!');
-      setForm({ nomeFantasia: '', email: '', senha: '', cnpj: '' });
-    } catch (err) {
-      alert('Erro ao cadastrar empresa.');
-    }
-  };
-
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => submitEmpresa(e, form, setForm)}>
         <h2>Cadastro de Empresa Parceira</h2>
         <input name="nomeFantasia" placeholder="Nome Fantasia" value={form.nomeFantasia} onChange={handleChange} />
         <input name="email" placeholder="Email" value={form.email} onChange={handleChange} />

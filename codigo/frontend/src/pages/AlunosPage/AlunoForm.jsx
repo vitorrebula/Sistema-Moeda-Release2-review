@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import api from '../services/api';
-import './Form.css';
+import { submitAluno } from '../../services/aluno';
+import '../defaultStyles/Form.css';
 
 export default function AlunoForm() {
   const [form, setForm] = useState({
@@ -10,20 +10,9 @@ export default function AlunoForm() {
   const handleChange = e =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    try {
-      await api.post('/alunos', form);
-      alert('Aluno cadastrado com sucesso!');
-      setForm({ nome: '', email: '', senha: '', cpf: '', rg: '', endereco: '', curso: '' });
-    } catch (err) {
-      alert('Erro ao cadastrar aluno.');
-    }
-  };
-
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => submitAluno(e, form, setForm)}>
         <h2>Cadastro de Aluno</h2>
         <input name="nome" placeholder="Nome" value={form.nome} onChange={handleChange} />
         <input name="email" placeholder="Email" value={form.email} onChange={handleChange} />
