@@ -1,5 +1,7 @@
 package com.example.moeda.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import com.example.moeda.model.Aluno;
 import com.example.moeda.model.Transacao;
 import com.example.moeda.repository.AlunoRepository;
@@ -21,7 +23,9 @@ public class AlunoController {
 
     @GetMapping("/{id}/extrato")
     public List<Transacao> extrato(@PathVariable Long id) {
-        Aluno aluno = alunoRepo.findById(id).orElseThrow();
+        Aluno aluno = alunoRepo.findById(id).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "Aluno não encontrado com ID: " + id)
+        );
         return transacaoRepo.findByDestino(aluno.getNome());
     }
 }
