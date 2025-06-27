@@ -4,16 +4,41 @@ import jakarta.persistence.*;
 
 @Entity
 public class Aluno {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(nullable = false)
     private String nome;
+
+    @NotBlank
+    @Email
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @NotBlank
+    @Size(min = 6)
     private String senha;
+
+    @NotBlank
+    @Column(length = 11, unique = true)
     private String cpf;
+
+    @NotBlank
+    @Column(length = 20)
     private String rg;
+
+    @NotBlank
     private String endereco;
+
+    @NotBlank
     private String curso;
-    private int saldo;
+
+    @PositiveOrZero
+    @Column(nullable = false)
+    private float saldo;
 
 
     public Long getId() {
